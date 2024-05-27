@@ -1,7 +1,6 @@
 from random import randrange
 from tkinter import END
 
-import graficador
 
 
 class Jugador:
@@ -29,7 +28,7 @@ class Jugador:
         if not desa:
             caja_entrada_dados.config(state="normal")
             caja_entrada_dados.delete(0, END)
-            caja_entrada_dados.insert(0, "%s presione continuar" % self.nombre)
+            caja_entrada_dados.insert(0, "%s presione ENTER" % self.nombre)
             caja_entrada_dados.config(state="readonly")
             inp = ""
             while inp == "":
@@ -50,9 +49,10 @@ class Jugador:
         y = 0
         mod = 3
         if not desa:
+
                 caja_entrada_dados.config(state="normal")
                 caja_entrada_dados.delete(0,END)
-                caja_entrada_dados.insert(0,"%s presione continuar"%self.nombre)
+                caja_entrada_dados.insert(0,"%s presione ENTER"%self.nombre)
                 caja_entrada_dados.config(state="readonly")
                 inp=""
                 texto_ingresado=""

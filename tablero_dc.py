@@ -2,7 +2,7 @@ from espacio import Espacio
 from tablero import Tablero
 from tkinter import *
 
-class Tablero_Mario(Tablero):
+class Tablero_dc(Tablero):
 
     def crearTablero(self, Pan):
 
@@ -235,7 +235,7 @@ class Tablero_Mario(Tablero):
             tablero.append(NuevaCasilla)
         lab = ""
         if mod > 1:
-            imagen = PhotoImage(file="img_mario\\castillo.gif")
+            imagen = PhotoImage(file="img_dc\\dc_tab.gif")
             lab = Label(Pan, bg="black")
             lab.place(x=144, y=144, width=162, height=162)
             lab = Label(Pan, image=imagen)
@@ -246,8 +246,3 @@ class Tablero_Mario(Tablero):
         #labelF.lift()
 
         return tablero
-
-
-
-
-

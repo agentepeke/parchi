@@ -1,4 +1,4 @@
-from tkinter import Label, Tk, PhotoImage
+from tkinter import Label
 
 
 class Ficha:  # Declara la clase ficha
@@ -24,26 +24,27 @@ class Ficha:  # Declara la clase ficha
             self.etiqueta.img = Ficha.imgFichas[colorFicha]
             if self.espacioActual.NoFichas == 0:
                 self.etiqueta.place(x = self.espacioActual.x - 210, y = self.espacioActual.y + 40,width = 14,height = 14)
-                self.xI = self.espacioActual.x -210
+                self.xI = self.espacioActual.x +40
                 self.yI = self.espacioActual.y + 40
                 print(self.espacioActual.x)
             elif self.espacioActual.NoFichas == 1:
                 self.etiqueta.place(x=self.espacioActual.x - 170, y=self.espacioActual.y+40,width=14,height=14)
-                self.xI = self.espacioActual.x - 170
+                self.xI = self.espacioActual.x +40
                 self.yI = self.espacioActual.y + 40
             elif self.espacioActual.NoFichas == 2:
                 self.etiqueta.place(x=self.espacioActual.x - 210,y=self.espacioActual.y+80,width=14,height=14)
-                self.xI = self.espacioActual.x - 210
+                self.xI = self.espacioActual.x +80
                 self.yI = self.espacioActual.y + 80
             elif self.espacioActual.NoFichas == 3:
                 self.etiqueta.place(x=self.espacioActual.x - 170,y=self.espacioActual.y+80,width=14,height=14)
-                self.xI = self.espacioActual.x - 170
+                self.xI = self.espacioActual.x +80
                 self.yI = self.espacioActual.y + 80
         self.espacioActual.NoFichas+=1
         self.etiqueta = self.etiqueta
         if mod>1:
             self.etiqueta.bind("<Enter>",self.Entra)
             self.etiqueta.bind("<Leave>",self.Sale)
+            self.etiqueta.lift()
         self.PosFicha = ""
 
     def Entra(self,event, L_NOMBRES):
@@ -52,14 +53,11 @@ class Ficha:  # Declara la clase ficha
 
         L_NOMBRES.config(text="NOMBRES")
     def imprimirPropiedades(self):
-        """
-        Returns the current state of the token
-        @return: None
-        """
         return "Ficha %s: color= %s espacio=%s estado=%s" % (
             self.nombreFicha, self.colorFicha, self.espacioActual.numeroEspacio, self.estadoJuego)
     def eliminarFicha(self):
         self.etiqueta.destroy()
+
     def cambiarPosicion(self, NuevoEspacio):
         """
         Actualiza la posicion

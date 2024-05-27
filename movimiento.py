@@ -1,19 +1,13 @@
 import tkinter
-from tkinter import END
-
-from ficha import Ficha
 from jugador import Jugador
-from tablero_mario import Tablero_Mario
+
 
 
 class Movimiento:
 
 
     def GameOver(self, Jugadores):
-        """
-        @param Jugadores: List ob object of class 'Jugador'
 
-        """
         numberWonPlayers = 0  # Counts the number of players that have already won
         for jugadorActual in Jugadores:
             if jugadorActual.GanoJugador:
@@ -180,16 +174,7 @@ class Movimiento:
 
     def realizarMovimiento(self, movimientoRealizar, tablero, jugadorActual,
                            Jugadores, caja_entrada_dados, boton_entrada_dados, Pan):  # Añadimos parametro jugador actual para poder definir la ultima ficha de cada jugador
-        """
-        Actualiza las posiciones de las fichas en el tablero
 
-
-        @param movimientoRealizar: Es la tupla que contiene
-        1. El movimiento a realizar (String)
-        2. Objeto ficha a mover
-        3. Objeto ficha capturado (String vacío si no captura)
-
-        """
         mod = 3
         if movimientoRealizar == None:
             return
@@ -267,6 +252,8 @@ class Movimiento:
     def seleccionarOpcion(self):
         seleccion = True
 
+
+
     def opciones(self, Lista, JugadorActual, caja_entrada_dados, boton_entrada_dados, Pan):
         eleccion = 0
         mod = 3
@@ -275,16 +262,14 @@ class Movimiento:
             clicked = tkinter.StringVar(Pan)
             caja_entrada_dados.config(state="normal")
             caja_entrada_dados.delete(0, tkinter.END)
-            caja_entrada_dados.insert(0,
-                                      f"{JugadorActual.nombre} seleccione una opción de la lista y oprima continuar.")
+            caja_entrada_dados.insert(0, "%s seleccione una opción de la lista y oprima continuar." % JugadorActual.nombre)
             caja_entrada_dados.config(state="readonly")
-            if Lista is not None:
-                options = [opcion[0] for opcion in Lista]
-            else:
-                options = []
+            options = [opcion[0] for opcion in Lista]
             clicked.set("Seleccione una opción")
-            drop = tkinter.OptionMenu(Pan, clicked, *options)
-            drop.place(x=0, y=600, width=700, height=50)
+            CAJA_OPCION = tkinter.OptionMenu(Pan, clicked, *options)
+            CAJA_OPCION.config(bg="orange", font=("Comic Sans MS", 8), fg="white")
+            CAJA_OPCION["menu"].configure(bg="orange", font=("Comic Sans MS", 15), fg="white")
+            CAJA_OPCION.place(x=350, y=600, width=700, height=50)
             boton_entrada_dados.config(command=self.seleccionarOpcion)
             while not seleccion:
                 if clicked.get() != "Seleccione una opción":
@@ -292,12 +277,11 @@ class Movimiento:
                 Pan.update()
             eleccion = options.index(clicked.get()) + 1
             boton_entrada_dados.config(command=lambda: self.obtenerDadosIngresados(caja_entrada_dados))
-            drop.destroy()
-        Pan.update()
+            CAJA_OPCION.destroy()
+
         return Lista[eleccion - 1]
 
     def FuncDados(self, etiqueta, accion):
-        global dadoSeleccionado
         if accion == 0:
             etiqueta.config(bg="red")
         elif accion == 1:
